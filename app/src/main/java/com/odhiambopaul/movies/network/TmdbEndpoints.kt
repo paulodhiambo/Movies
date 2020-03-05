@@ -10,6 +10,6 @@ interface TmdbEndpoints {
 //    fun getMovies(@Query("api_key") key: String): Observable<PopularMovies>
 
     @GET("/3/movie/popular")
-    suspend fun getMovies(@Query("api_key") key: String): Response<PopularMovies>
+    suspend fun getMovies(): Response<PopularMovies>
 
 }

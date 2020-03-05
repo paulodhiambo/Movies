@@ -1,4 +1,4 @@
-package com.odhiambopaul.movies.ui.home
+  package com.odhiambopaul.movies.ui.home
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.odhiambopaul.movies.R
 import com.odhiambopaul.movies.network.PopularMovies
 import com.odhiambopaul.movies.network.ServiceBuilder
-import com.odhiambopaul.movies.util.api_key
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class MainActivity : AppCompatActivity() {
+  class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 //                .subscribeOn(Schedulers.io())
 //                .subscribe({response -> onResponse(response)}, {t -> onFailure(t) })
         CoroutineScope(Dispatchers.IO).launch {
-            val response=ServiceBuilder.buildService().getMovies(api_key)
+            val response=ServiceBuilder.buildService().getMovies()
             withContext(Dispatchers.Main){
                 try {
                     if(response.isSuccessful)
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter =
-                MoviesAdapter(response.results)
+                MoviesAdapter(response.results,this@MainActivity)
         }
     }
 }
